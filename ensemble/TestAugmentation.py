@@ -55,7 +55,7 @@ class FiveCrop():
 
 class TTA(Ensemble):
     # ver se essas coisas funcionam com batches
-    transforms = [torch.nn.functional.hflip,
+    transforms = [transforms.functional.hflip,
                   Scale(1.04),
                   Scale(1.1),
                   Rotate(15),
