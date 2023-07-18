@@ -9,5 +9,8 @@ class DeepEnsemble(Ensemble):
     def get_samples(self,x):
         ensemble = []
         for model in self.model:
-            ensemble.append(model(x))
+            if self.apply_softmax:
+                ensemble.append(model(x).softmax(-1))
+            else:
+                ensemble.append(model(x))
         return torch.stack(ensemble)
