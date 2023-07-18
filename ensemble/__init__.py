@@ -13,12 +13,12 @@ class Ensemble(torch.nn.Module):
     def get_samples(self,x:torch.tensor):
         '''Default ensemble model is to assume that self.model returns samples'''
         ensemble = self.model(x)
+        if self.apply_softmax:
+            ensemble = ensemble.softmax(-1)
         return ensemble
 
     def ensemble_forward(self,x:torch.tensor):
         ensemble = self.get_samples(x)
-        if self.apply_softmax:
-            ensemble = ensemble.softmax(-1)
         return ensemble.mean(0)
         
     def forward(self,x):
